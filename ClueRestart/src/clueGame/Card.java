@@ -1,8 +1,8 @@
 package clueGame;
 
 public class Card {
-	String cardName;
-	
+	public String cardName;
+	public CardType type;
 	@Override
 	public boolean equals(Object o) {
 		return false;
