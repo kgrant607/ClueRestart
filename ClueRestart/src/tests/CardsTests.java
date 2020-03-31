@@ -24,13 +24,15 @@ public class CardsTests {
 	board.loadCardsConfig();
 	}
 	
-	
+	//check that the deck has the appropriate amount of cads
 	@Test
 	public void cardNumberTest() {
 		int deckSize = 22;
 		assert(deckSize == board.deck.size());
 	}
 	
+	
+	//make sure that each card has a type, and that the appropriate amounts of each card type exist
 	@Test
 	public void cardTypeTest() {
 		int weapon=0;
@@ -52,6 +54,8 @@ public class CardsTests {
 		assertEquals(player,6);
 	}
 	
+	
+	//check that one of each type of card is correct and contained in the deck
 	@Test
 	public void cardTest() {
 		Card gun = new Card();
@@ -74,6 +78,8 @@ public class CardsTests {
 		}
 	}
 	
+	
+	//check that all cards are dealt by adding all hands and comparing with appropriate size of deck
 	@Test
 	public void allCardsDealt() {
 		board.deal();
@@ -84,6 +90,8 @@ public class CardsTests {
 		assertEquals(22, cardCount);
 	}
 	
+	
+	//compare all players hands to make sure they are within +/- 1 card of each other
 	@Test
 	public void cardsPerPlayer() {
 		board.deal();
@@ -94,6 +102,7 @@ public class CardsTests {
 		}
 	}
 	
+	//make sure no card is duplicated when dealt
 	@Test
 	public void noDuplicateCards() {
 		board.deal();
@@ -109,6 +118,7 @@ public class CardsTests {
 		}
 	}
 	
+	//check that random players in the list are properly assigned 
 	@Test
 	public void checkPeople() {
 		assert(board.players.get(0).name.equals("Baldwin"));
