@@ -1,0 +1,5 @@
+Our Tests:
+-Door directions checked were based off of ones where the door is 
+surrounded on multiple sides. Ex. (13,6) faces down but there is also walkway
+to the right.
+-Room initials were checked for randomly chosen squares.

@@ -1,0 +1,12 @@
+BB, Brown Building, Card
+BE, Berthoud Hall, Card
+GH, Gugenheim Hall, Card
+Li, Library, Card
+CH, Chauvenet Hall, Card
+GC, Green Center, Card
+MZ, Marquez, Card
+CT, CTLM, Card
+CK, Coortek, Card
+AH, Alderson, Card
+W, Walkway, Other
+X, Kafadar, Other
