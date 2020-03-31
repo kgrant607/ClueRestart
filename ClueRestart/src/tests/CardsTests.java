@@ -15,18 +15,23 @@ import clueGame.CardType;
 import clueGame.Player;
 
 public class CardsTests {
-	private static Board board;
-	@BeforeClass
+	private Board board;
+	
+	@Before
 	public void Setup() throws FileNotFoundException, BadConfigFormatException, SecurityException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException{
-	Board board = Board.getInstance();
+	board = Board.getInstance();
 	board.setConfigFiles("data/Layout1.csv", "data/Legend.txt", "data/Weapons.txt", "data/Players.txt");
 	board.loadCardsConfig();
 	}
+	
+	
 	@Test
 	public void cardNumberTest() {
-		assertEquals(24, board.deck.size());
+		int deckSize = 22;
+		assert(deckSize == board.deck.size());
 	}
 	
+	@Test
 	public void cardTypeTest() {
 		int weapon=0;
 		int player=0;
@@ -42,12 +47,12 @@ public class CardsTests {
 				room++;
 			}
 		}
-		assertEquals(room,12);
+		assertEquals(room,10);
 		assertEquals(weapon,6);
 		assertEquals(player,6);
 	}
 	
-	
+	@Test
 	public void cardTest() {
 		Card gun = new Card();
 		gun.cardName="Gun";
@@ -69,6 +74,7 @@ public class CardsTests {
 		}
 	}
 	
+	@Test
 	public void allCardsDealt() {
 		board.deal();
 		int cardCount = 0;
@@ -78,7 +84,8 @@ public class CardsTests {
 		cardCount+=3;
 		assertEquals(24, cardCount);
 	}
-
+	
+	@Test
 	public void cardsPerPlayer() {
 		board.deal();
 		for(Player player1 : board.players) {
@@ -88,6 +95,7 @@ public class CardsTests {
 		}
 	}
 	
+	@Test
 	public void noDuplicateCards() {
 		board.deal();
 		int playerCount;
@@ -102,11 +110,13 @@ public class CardsTests {
 		}
 	}
 	
+	@Test
 	public void checkPeople() {
 		assert(board.players.get(0).name.equals("Baldwin"));
 		assert(board.players.get(2).name.equals("CPW"));
 		assert(board.players.get(5).name.equals("Paone"));
 		
+		System.out.println(board.players.get(0).color.toString());
 		assert(board.players.get(0).color.toString().equals("Blue"));
 		assert(board.players.get(2).color.toString().equals("Red"));
 		assert(board.players.get(5).color.toString().equals("Pink"));
