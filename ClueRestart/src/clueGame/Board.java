@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
+import java.lang.reflect.Field;
 
 /**
  * Board Class
@@ -36,6 +38,8 @@ public class Board {
 	private Set<BoardCell> visited;
 
 	private ArrayList<String> roomNames;
+	public ArrayList<Card> deck;
+	public ArrayList<Player> players;
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
@@ -107,13 +111,45 @@ public class Board {
 	 * 
 	 * @throws FileNotFoundException
 	 * @throws BadConfigFormatException
+	 * @throws ClassNotFoundException 
+	 * @throws SecurityException 
+	 * @throws IllegalAccessException 
+	 * @throws IllegalArgumentException 
 	 */
-	public void loadCardsConfig() throws FileNotFoundException, BadConfigFormatException {
-		FileReader is = new FileReader(weaponsConfigFile);
-		Scanner weaponsConfig = new Scanner(is);
+	public void loadCardsConfig() throws FileNotFoundException, BadConfigFormatException, SecurityException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException {
+		FileReader reader1 = new FileReader(weaponsConfigFile);
+		Scanner weaponsConfig = new Scanner(reader1);
+		FileReader reader2 = new FileReader(playersConfigFile);
+		Scanner playerConfig = new Scanner(reader2);
 		
+		while(weaponsConfig.hasNextLine()) {
+			String weapon = weaponsConfig.nextLine();
+			Card card = new Card();
+			card.cardName = weapon;
+			card.type=CardType.WEAPON;
+			deck.add(card);
+		}
+		weaponsConfig.close();
 		
-		//to do: finish this
+		while(playerConfig.hasNextLine()) {
+			String line = weaponsConfig.nextLine();
+			Card card = new Card();
+			Player player = new Player();
+			card.cardName = line.split(" ")[0];
+			try {
+				Field field = Class.forName("java.awt.Color").getField(line.split(" ")[1].trim());
+				player.color = (Color)field.get(null);
+			} catch (NoSuchFieldException e) {
+				player.color = null;
+			} 
+			player.row = Integer.valueOf(line.split(" ")[2]);
+			player.column = Integer.valueOf(line.split(" ")[3]);
+			card.type=CardType.PERSON;
+			deck.add(card);
+			players.add(player);
+		}
+		playerConfig.close();
+		
 	}
 	/**
 	 * Loads the room configuration data

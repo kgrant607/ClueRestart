@@ -24,21 +24,21 @@ public class CardsTests {
 	}
 	@Test
 	public void cardNumberTest() {
-		assertEquals(24, board.deck.length());
+		assertEquals(24, board.deck.size());
 	}
 	
 	public void cardTypeTest() {
 		int weapon=0;
 		int player=0;
 		int room=0;
-		for(int i=0;i<board.deck.length(),i++) {
-			if(board.deck.at(i).type == CardType.PERSON) {
+		for(int i=0;i<board.deck.size(),i++) {
+			if(board.deck.get(i).type == CardType.PERSON) {
 				player++;
 			}
-			else if(board.deck.at(i).type == CardType.WEAPON) {
+			else if(board.deck.get(i).type == CardType.WEAPON) {
 				weapon++;
 			}
-			else if(board.deck.at(i).type == CardType.ROOM) {
+			else if(board.deck.get(i).type == CardType.ROOM) {
 				room++;
 			}
 		}
@@ -72,8 +72,8 @@ public class CardsTests {
 	public void allCardsDealt() {
 		board.deal();
 		int cardCount;
-		for(Player player : board.Players) {
-			cardCount += player.myCards.length();
+		for(Player player : board.players) {
+			cardCount += player.myCards.size();
 		}
 		cardCount+=3;
 		assertEquals(24, cardCount);
@@ -83,7 +83,7 @@ public class CardsTests {
 		board.deal();
 		for(Player player1 : board.players) {
 			for(Player player2 : board.players) {
-				assert(Math.abs(player1.myCards.length()-player2.myCards.length)<=1);
+				assert(Math.abs(player1.myCards.size()-player2.myCards.size())<=1);
 			}
 		}
 	}
@@ -103,17 +103,17 @@ public class CardsTests {
 	}
 	
 	public void checkPeople() {
-		assert(board.players.at(0).name.equals("Baldwin"));
-		assert(board.players.at(2).name.equals("CPW"));
-		assert(board.players.at(5).name.equals("Paone"));
+		assert(board.players.get(0).name.equals("Baldwin"));
+		assert(board.players.get(2).name.equals("CPW"));
+		assert(board.players.get(5).name.equals("Paone"));
 		
-		assert(board.players.at(0).color.toString().equals("Blue"));
-		assert(board.players.at(2).color.toString().equals("Red"));
-		assert(board.players.at(5).color.toString().equals("Pink"));
+		assert(board.players.get(0).color.toString().equals("Blue"));
+		assert(board.players.get(2).color.toString().equals("Red"));
+		assert(board.players.get(5).color.toString().equals("Pink"));
 		
-		assert(board.players.at(0).row == 0);
-		assert(board.players.at(1).column == 5);
-		assert(board.players.at(5).row == 23);
-		assert(board.players.at(5).column == 19);
+		assert(board.players.get(0).row == 0);
+		assert(board.players.get(1).column == 5);
+		assert(board.players.get(5).row == 23);
+		assert(board.players.get(5).column == 19);
 	}
 }
