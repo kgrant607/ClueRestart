@@ -20,7 +20,8 @@ public class Board {
 	// File names for the config files
 	private String boardConfigFile;
 	private String roomConfigFile;
-	private String cardsConfigFile;
+	private String weaponsConfigFile;
+	private String playersConfigFile;
 	// Dimensions of the board, determined from config file
 	private int numRows;
 	private int numColumns;
@@ -60,10 +61,11 @@ public class Board {
 	 * @param boardConfig
 	 * @param roomConfig
 	 */
-	public void setConfigFiles(String boardConfig, String roomConfig, String cardsConfig) {
+	public void setConfigFiles(String boardConfig, String roomConfig, String weaponsConfig, String playersConfig) {
 		boardConfigFile = boardConfig;
 		roomConfigFile = roomConfig;
-		cardsConfigFile = cardsConfig;
+		weaponsConfigFile = weaponsConfig;
+		playersConfigFile = playersConfig;
 	}
 	
 	public void setConfigFiles(String boardConfig, String roomConfig) {
@@ -107,8 +109,9 @@ public class Board {
 	 * @throws BadConfigFormatException
 	 */
 	public void loadCardsConfig() throws FileNotFoundException, BadConfigFormatException {
-		FileReader is = new FileReader(cardsConfigFile);
-		Scanner cardsConfig = new Scanner(is);
+		FileReader is = new FileReader(weaponsConfigFile);
+		Scanner weaponsConfig = new Scanner(is);
+		
 		
 		//to do: finish this
 	}
@@ -384,5 +387,10 @@ public class Board {
 		// Initialize will load BOTH config files
 		board.initialize();
 
+	}
+
+	public void deal() {
+		// TODO Auto-generated method stub
+		
 	}
 }
