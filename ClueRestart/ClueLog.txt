@@ -1,0 +1,52 @@
+Invalid room direction N
+Invalid room direction N
+Invalid room direction N
+Invalid room direction N
+Invalid room direction N
+Invalid room direction N
+Invalid room direction N
+Invalid room direction N
+Invalid room direction N
+Invalid room direction N
+Invalid room direction N
+Invalid room direction N
+Invalid room direction N
+Invalid room direction N
+Rows do not all have the same number of columns
+Room not defined Z
+Rows do not all have the same number of columns
+Room not defined Z
+Rows do not all have the same number of columns
+Room not defined Z
+Rows do not all have the same number of columns
+Room not defined Z
+Room file format incorrect junk
+Rows do not all have the same number of columns
+Room not defined Z
+Rows do not all have the same number of columns
+Room not defined Z
+Room file format incorrect junk
+Rows do not all have the same number of columns
+Room not defined Z
+Room file format incorrect junk
+Rows do not all have the same number of columns
+Room not defined Z
+Room file format incorrect K, Kitchen, X
+Rows do not all have the same number of columns
+Room not defined Z
+Room file format incorrect K, Kitchen, X
+Room not defined Z
+Room file format incorrect K, Kitchen, X
+Rows do not all have the same number of columns
+Room not defined Z
+Room file format incorrect K, Kitchen, X
+Rows do not all have the same number of columns
+Room not defined Z
+Room file format incorrect K, Kitchen, X
+Rows do not all have the same number of columns
+Room not defined Z
+Room file format incorrect K, Kitchen, X
+Rows do not all have the same number of columns
+Rows do not all have the same number of columns
+Room not defined Z
+Room file format incorrect K, Kitchen, X
