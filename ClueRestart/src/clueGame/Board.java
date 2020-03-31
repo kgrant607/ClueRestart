@@ -419,14 +419,18 @@ public class Board {
 		// Board is singleton, get the only instance
 		Board board = Board.getInstance();
 		// set the file names to use my config files
-		board.setConfigFiles("data/ClueLayout.csv", "data/ClueLegend.txt", "data/CTest_ClueCards.csv");
+		board.setConfigFiles("data/ClueLayout.csv", "data/ClueLegend.txt");
 		// Initialize will load BOTH config files
 		board.initialize();
 
 	}
 
 	public void deal() {
-		// TODO Auto-generated method stub
-		
+		int deckSize = deck.size();
+		for(int i=0; i < deckSize;i++) {
+			int rand = (int) (Math.random() * deck.size());
+			players.get(i%6).myCards.add(deck.get(rand));
+			deck.remove(rand);
+		}
 	}
 }

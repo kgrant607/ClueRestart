@@ -17,7 +17,7 @@ import clueGame.Player;
 public class CardsTests {
 	private static Board board;
 	@BeforeClass
-	public void Setup() throws FileNotFoundException, BadConfigFormatException{
+	public void Setup() throws FileNotFoundException, BadConfigFormatException, SecurityException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException{
 	Board board = Board.getInstance();
 	board.setConfigFiles("data/Layout1.csv", "data/Legend.txt", "data/Weapons.txt", "data/Players.txt");
 	board.loadCardsConfig();
@@ -31,7 +31,7 @@ public class CardsTests {
 		int weapon=0;
 		int player=0;
 		int room=0;
-		for(int i=0;i<board.deck.size(),i++) {
+		for(int i=0;i<board.deck.size();i++) {
 			if(board.deck.get(i).type == CardType.PERSON) {
 				player++;
 			}
@@ -71,7 +71,7 @@ public class CardsTests {
 	
 	public void allCardsDealt() {
 		board.deal();
-		int cardCount;
+		int cardCount = 0;
 		for(Player player : board.players) {
 			cardCount += player.myCards.size();
 		}
