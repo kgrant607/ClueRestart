@@ -65,6 +65,11 @@ public class Board {
 		roomConfigFile = roomConfig;
 		cardsConfigFile = cardsConfig;
 	}
+	
+	public void setConfigFiles(String boardConfig, String roomConfig) {
+		boardConfigFile = boardConfig;
+		roomConfigFile = roomConfig;
+	}
 
 	/**
 	 * Initialize the game
