@@ -81,8 +81,7 @@ public class CardsTests {
 		for(Player player : board.players) {
 			cardCount += player.myCards.size();
 		}
-		cardCount+=3;
-		assertEquals(24, cardCount);
+		assertEquals(22, cardCount);
 	}
 	
 	@Test
@@ -117,12 +116,12 @@ public class CardsTests {
 		assert(board.players.get(5).name.equals("Paone"));
 		
 		System.out.println(board.players.get(0).color.toString());
-		assert(board.players.get(0).color.toString().equals("Blue"));
-		assert(board.players.get(2).color.toString().equals("Red"));
-		assert(board.players.get(5).color.toString().equals("Pink"));
+		assert(board.players.get(0).color.equals(java.awt.Color.blue));
+		assert(board.players.get(2).color.equals(java.awt.Color.red));
+		assert(board.players.get(5).color.equals(java.awt.Color.pink));
 		
 		assert(board.players.get(0).row == 0);
-		assert(board.players.get(1).column == 5);
+		assert(board.players.get(0).column == 5);
 		assert(board.players.get(5).row == 23);
 		assert(board.players.get(5).column == 19);
 	}

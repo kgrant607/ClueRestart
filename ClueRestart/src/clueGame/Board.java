@@ -149,6 +149,7 @@ public class Board {
 			player.row = Integer.valueOf(lineArray[2]);
 			player.column = Integer.valueOf(lineArray[3]);
 			card.type=CardType.PERSON;
+			player.myCards = new ArrayList<Card>();
 			deck.add(card);
 			players.add(player);
 		}
@@ -447,7 +448,8 @@ public class Board {
 		int deckSize = deck.size();
 		for(int i=0; i < deckSize;i++) {
 			int rand = (int) (Math.random() * deck.size());
-			players.get(i%6).myCards.add(deck.get(rand));
+			int playerIndex = i%6;
+			players.get(playerIndex).myCards.add(deck.get(rand));
 			deck.remove(rand);
 		}
 	}
