@@ -117,6 +117,8 @@ public class Board {
 	 * @throws IllegalArgumentException 
 	 */
 	public void loadCardsConfig() throws FileNotFoundException, BadConfigFormatException, SecurityException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException {
+		deck = new ArrayList<Card>();
+		players = new ArrayList<Player>();
 		FileReader reader1 = new FileReader(weaponsConfigFile);
 		Scanner weaponsConfig = new Scanner(reader1);
 		FileReader reader2 = new FileReader(playersConfigFile);
@@ -132,24 +134,41 @@ public class Board {
 		weaponsConfig.close();
 		
 		while(playerConfig.hasNextLine()) {
-			String line = weaponsConfig.nextLine();
+			String line = playerConfig.nextLine();
 			Card card = new Card();
 			Player player = new Player();
-			card.cardName = line.split(" ")[0];
+			String[] lineArray = line.split(" ");
+			card.cardName = lineArray[0];
+			player.name = lineArray[0];
 			try {
-				Field field = Class.forName("java.awt.Color").getField(line.split(" ")[1].trim());
+				Field field = Class.forName("java.awt.Color").getField(lineArray[1].trim());
 				player.color = (Color)field.get(null);
-			} catch (NoSuchFieldException e) {
+			} catch (Exception e) {
 				player.color = null;
 			} 
-			player.row = Integer.valueOf(line.split(" ")[2]);
-			player.column = Integer.valueOf(line.split(" ")[3]);
+			player.row = Integer.valueOf(lineArray[2]);
+			player.column = Integer.valueOf(lineArray[3]);
 			card.type=CardType.PERSON;
+			player.myCards = new ArrayList<Card>();
 			deck.add(card);
 			players.add(player);
 		}
 		playerConfig.close();
 		
+		
+		FileReader reader3 = new FileReader(roomConfigFile);
+		Scanner roomConfig = new Scanner(reader3);
+		while(roomConfig.hasNextLine()) {
+			String line = roomConfig.nextLine();
+			Card card = new Card();
+			String[] lineArray = line.split(", ");
+			card.cardName = lineArray[1];
+			card.type = CardType.ROOM;
+			if(lineArray[2].contentEquals("Card")) {
+				deck.add(card);
+			}
+		}
+		roomConfig.close();
 	}
 	/**
 	 * Loads the room configuration data
@@ -419,14 +438,23 @@ public class Board {
 		// Board is singleton, get the only instance
 		Board board = Board.getInstance();
 		// set the file names to use my config files
+<<<<<<< HEAD
 		board.setConfigFiles("data/Layout1.csv", "data/Legend.txt", "data/Weapons.txt", "data/Players.txt");
+=======
+		board.setConfigFiles("data/ClueLayout.csv", "data/ClueLegend.txt");
+>>>>>>> d68a82fc085dc325b34339c6761bd189d08d265b
 		// Initialize will load BOTH config files
 		board.initialize();
 
 	}
 
 	public void deal() {
-		// TODO Auto-generated method stub
-		
+		int deckSize = deck.size();
+		for(int i=0; i < deckSize;i++) {
+			int rand = (int) (Math.random() * deck.size());
+			int playerIndex = i%6;
+			players.get(playerIndex).myCards.add(deck.get(rand));
+			deck.remove(rand);
+		}
 	}
 }

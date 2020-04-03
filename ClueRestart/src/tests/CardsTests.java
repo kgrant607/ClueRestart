@@ -15,18 +15,32 @@ import clueGame.CardType;
 import clueGame.Player;
 
 public class CardsTests {
+<<<<<<< HEAD
 	private static Board board;
 	@BeforeClass
 	public static void Setup() throws FileNotFoundException, BadConfigFormatException, SecurityException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException{
 	Board board = Board.getInstance();
+=======
+	private Board board;
+	
+	@Before
+	public void Setup() throws FileNotFoundException, BadConfigFormatException, SecurityException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException{
+	board = Board.getInstance();
+>>>>>>> d68a82fc085dc325b34339c6761bd189d08d265b
 	board.setConfigFiles("data/Layout1.csv", "data/Legend.txt", "data/Weapons.txt", "data/Players.txt");
 	board.loadCardsConfig();
 	}
+	
+	//check that the deck has the appropriate amount of cads
 	@Test
 	public void cardNumberTest() {
-		assertEquals(24, board.deck.size());
+		int deckSize = 22;
+		assert(deckSize == board.deck.size());
 	}
 	
+	
+	//make sure that each card has a type, and that the appropriate amounts of each card type exist
+	@Test
 	public void cardTypeTest() {
 		int weapon=0;
 		int player=0;
@@ -42,12 +56,14 @@ public class CardsTests {
 				room++;
 			}
 		}
-		assertEquals(room,12);
+		assertEquals(room,10);
 		assertEquals(weapon,6);
 		assertEquals(player,6);
 	}
 	
 	
+	//check that one of each type of card is correct and contained in the deck
+	@Test
 	public void cardTest() {
 		Card gun = new Card();
 		gun.cardName="Gun";
@@ -69,16 +85,21 @@ public class CardsTests {
 		}
 	}
 	
+	
+	//check that all cards are dealt by adding all hands and comparing with appropriate size of deck
+	@Test
 	public void allCardsDealt() {
 		board.deal();
 		int cardCount = 0;
 		for(Player player : board.players) {
 			cardCount += player.myCards.size();
 		}
-		cardCount+=3;
-		assertEquals(24, cardCount);
+		assertEquals(22, cardCount);
 	}
-
+	
+	
+	//compare all players hands to make sure they are within +/- 1 card of each other
+	@Test
 	public void cardsPerPlayer() {
 		board.deal();
 		for(Player player1 : board.players) {
@@ -88,6 +109,8 @@ public class CardsTests {
 		}
 	}
 	
+	//make sure no card is duplicated when dealt
+	@Test
 	public void noDuplicateCards() {
 		board.deal();
 		int playerCount;
@@ -102,17 +125,20 @@ public class CardsTests {
 		}
 	}
 	
+	//check that random players in the list are properly assigned 
+	@Test
 	public void checkPeople() {
 		assert(board.players.get(0).name.equals("Baldwin"));
 		assert(board.players.get(2).name.equals("CPW"));
 		assert(board.players.get(5).name.equals("Paone"));
 		
-		assert(board.players.get(0).color.toString().equals("Blue"));
-		assert(board.players.get(2).color.toString().equals("Red"));
-		assert(board.players.get(5).color.toString().equals("Pink"));
+		System.out.println(board.players.get(0).color.toString());
+		assert(board.players.get(0).color.equals(java.awt.Color.blue));
+		assert(board.players.get(2).color.equals(java.awt.Color.red));
+		assert(board.players.get(5).color.equals(java.awt.Color.pink));
 		
 		assert(board.players.get(0).row == 0);
-		assert(board.players.get(1).column == 5);
+		assert(board.players.get(0).column == 5);
 		assert(board.players.get(5).row == 23);
 		assert(board.players.get(5).column == 19);
 	}

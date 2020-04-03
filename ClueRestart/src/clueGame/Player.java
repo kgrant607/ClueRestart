@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 public class Player {
-	String playerName;
 	public int row;
 	public int column;
 	public Color color;
