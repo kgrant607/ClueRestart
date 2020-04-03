@@ -125,7 +125,6 @@ public class CardsTests {
 		assert(board.players.get(2).name.equals("CPW"));
 		assert(board.players.get(5).name.equals("Paone"));
 		
-		System.out.println(board.players.get(0).color.toString());
 		assert(board.players.get(0).color.equals(java.awt.Color.blue));
 		assert(board.players.get(2).color.equals(java.awt.Color.red));
 		assert(board.players.get(5).color.equals(java.awt.Color.pink));

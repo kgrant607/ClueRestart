@@ -40,6 +40,7 @@ public class Board {
 	private ArrayList<String> roomNames;
 	public ArrayList<Card> deck;
 	public ArrayList<Player> players;
+	public Solution solution;
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
@@ -259,7 +260,7 @@ public class Board {
 					boardConfig.close();
 					throw new BadConfigFormatException("Room not defined " + tokens[col]);
 				} else {
-					board[row][col] = new BoardCell(row, col, tokens[col].toUpperCase());
+					getBoard()[row][col] = new BoardCell(row, col, tokens[col].toUpperCase());
 				}
 			}
 			row++;
@@ -289,7 +290,7 @@ public class Board {
 		Set<BoardCell> neighbors = new HashSet<BoardCell>();
 		// Only need to calculate adjacency lists for walkway and doorway
 		// Can't walk around in rooms
-		BoardCell cell = board[row][col];
+		BoardCell cell = getBoard()[row][col];
 		if (cell.isDoorway()) {
 			checkDoorway(row, col, cell.getDoorDirection(), neighbors);
 		} else if (cell.isWalkway()) {
@@ -320,14 +321,14 @@ public class Board {
 	 * @param neighbors - neighbors to cell
 	 */
 	private void checkDoorway(int row, int col, DoorDirection direction, Set<BoardCell> neighbors) {
-		if (direction == DoorDirection.DOWN && row + 1 < numRows && board[row + 1][col].isWalkway()) {
-			neighbors.add(board[row + 1][col]);
-		} else if (direction == DoorDirection.UP && row - 1 >= 0 && board[row - 1][col].isWalkway()) {
-			neighbors.add(board[row - 1][col]);
-		} else if (direction == DoorDirection.LEFT && col - 1 >= 0 && board[row][col - 1].isWalkway()) {
-			neighbors.add(board[row][col - 1]);
-		} else if (direction == DoorDirection.RIGHT && col + 1 < numColumns && board[row][col + 1].isWalkway()) {
-			neighbors.add(board[row][col + 1]);
+		if (direction == DoorDirection.DOWN && row + 1 < numRows && getBoard()[row + 1][col].isWalkway()) {
+			neighbors.add(getBoard()[row + 1][col]);
+		} else if (direction == DoorDirection.UP && row - 1 >= 0 && getBoard()[row - 1][col].isWalkway()) {
+			neighbors.add(getBoard()[row - 1][col]);
+		} else if (direction == DoorDirection.LEFT && col - 1 >= 0 && getBoard()[row][col - 1].isWalkway()) {
+			neighbors.add(getBoard()[row][col - 1]);
+		} else if (direction == DoorDirection.RIGHT && col + 1 < numColumns && getBoard()[row][col + 1].isWalkway()) {
+			neighbors.add(getBoard()[row][col + 1]);
 		}
 	}
 
@@ -346,7 +347,7 @@ public class Board {
 		}
 
 		// get the cell
-		BoardCell cell = board[row][col];
+		BoardCell cell = getBoard()[row][col];
 		// If this piece is a walkway and neighbor is walkway, add it
 		if (cell.isWalkway()) {
 			neighbors.add(cell);
@@ -367,7 +368,7 @@ public class Board {
 	 * @param pathLength - length of path
 	 */
 	public void calcTargets(int row, int col, int pathLength) {
-		BoardCell startNode = board[row][col];
+		BoardCell startNode = getBoard()[row][col];
 		// Reset the data structures
 		targets = new HashSet<BoardCell>();
 		visited = new HashSet<BoardCell>();
@@ -425,11 +426,11 @@ public class Board {
 	}
 
 	public BoardCell getCellAt(int row, int col) {
-		return board[row][col];
+		return getBoard()[row][col];
 	}
 
 	public Set<BoardCell> getAdjList(int row, int col) {
-		BoardCell cell = board[row][col];
+		BoardCell cell = getBoard()[row][col];
 		return cell.getAdjacencies();
 	}
 
@@ -452,5 +453,24 @@ public class Board {
 			players.get(playerIndex).myCards.add(deck.get(rand));
 			deck.remove(rand);
 		}
+	}
+
+	public BoardCell[][] getBoard() {
+		return board;
+	}
+
+	public Object getSolution() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean testAccusation(Object solution) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public Card handleSuggestion(int i, Solution test) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

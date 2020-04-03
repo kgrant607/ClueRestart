@@ -2,6 +2,7 @@ package clueGame;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class Player {
 	public int row;
@@ -10,6 +11,7 @@ public class Player {
 	public ArrayList<Card> myCards;
 	public String name;
 	
+	
 	public Player() {
 		
 	}
@@ -17,4 +19,6 @@ public class Player {
 	public Card disproveSuggestion(Solution suggestion) {
 		return null;
 	}
+
+	
 }
