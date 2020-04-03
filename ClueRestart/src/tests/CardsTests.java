@@ -15,11 +15,18 @@ import clueGame.CardType;
 import clueGame.Player;
 
 public class CardsTests {
+<<<<<<< HEAD
+	private static Board board;
+	@BeforeClass
+	public static void Setup() throws FileNotFoundException, BadConfigFormatException, SecurityException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException{
+	Board board = Board.getInstance();
+=======
 	private Board board;
 	
 	@Before
 	public void Setup() throws FileNotFoundException, BadConfigFormatException, SecurityException, ClassNotFoundException, IllegalArgumentException, IllegalAccessException{
 	board = Board.getInstance();
+>>>>>>> d68a82fc085dc325b34339c6761bd189d08d265b
 	board.setConfigFiles("data/Layout1.csv", "data/Legend.txt", "data/Weapons.txt", "data/Players.txt");
 	board.loadCardsConfig();
 	}
