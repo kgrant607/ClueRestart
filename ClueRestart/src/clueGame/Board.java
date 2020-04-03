@@ -419,7 +419,7 @@ public class Board {
 		// Board is singleton, get the only instance
 		Board board = Board.getInstance();
 		// set the file names to use my config files
-		board.setConfigFiles("data/ClueLayout.csv", "data/ClueLegend.txt", "data/CTest_ClueCards.csv");
+		board.setConfigFiles("data/Layout1.csv", "data/Legend.txt", "data/Weapons.txt", "data/Players.txt");
 		// Initialize will load BOTH config files
 		board.initialize();
 
